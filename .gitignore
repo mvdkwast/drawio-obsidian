@@ -7,3 +7,6 @@ dist/
 
 # obsidian
 data.json
+
+# IDE
+.idea

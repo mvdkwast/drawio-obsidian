@@ -1,5 +1,5 @@
 import typescript from "@rollup/plugin-typescript";
-import { terser } from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
 import copy from "rollup-plugin-copy";
 import clear from "rollup-plugin-clear";
 import inline from "./rollup-plugin-inline";

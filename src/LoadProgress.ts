@@ -4,28 +4,27 @@ export function createLoadProgress(
   app: ObsidianApp,
   container: HTMLElement
 ): LoadProgress {
-  const obsidianAppLoadProgress = app.loadProgress;
-  const ObsidianLoadProgress = Object.getPrototypeOf(
-    obsidianAppLoadProgress
-  ).constructor;
-  const loadProgress = new ObsidianLoadProgress();
-  const proto = {
-    container,
-    show() {
-      clearTimeout(this.showTimeout);
-      this.showTimeout = 0;
-      this.container.appendChild(this.el);
-      this.el.style.opacity = "";
+
+  // Obsidian pre 1.6 loadProgress has been removed with no obvious replacement
+  // For now just mock the expected interface until a better solution is found
+
+  return new class implements LoadProgress {
+    private message = "Progress";
+    private visible = false;
+
+    setMessage(message: string): this {
+      this.message = message;
       return this;
-    },
-    hide() {
-      clearTimeout(this.showTimeout);
-      this.showTimeout = 0;
-      this.el.remove();
+    }
+
+    hide(): this {
+      this.visible = false;
       return this;
-    },
-  };
-  Object.setPrototypeOf(proto, Object.getPrototypeOf(loadProgress));
-  Object.setPrototypeOf(loadProgress, proto);
-  return loadProgress;
+    }
+
+    show(): this {
+      this.visible = true;
+      return this;
+    }
+  }
 }

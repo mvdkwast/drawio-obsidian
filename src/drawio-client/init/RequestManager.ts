@@ -1,4 +1,6 @@
 import { patch } from "../patch";
+import drawioCss from "inline!./src/drawio-client/drawio.css";
+
 type ResponseList = { mediaType: string; href: string; source: string }[];
 
 export class RequestManager {
@@ -202,9 +204,8 @@ export function loadScript(src: string, scriptLoadCallback?: () => void) {
   document.head.appendChild(script);
 }
 
-export function loadStylesheet(href: string) {
-  const link = document.createElement("link");
-  link.setAttribute("rel", "stylesheet");
-  link.setAttribute("href", href);
-  document.head.appendChild(link);
+export function loadStylesheet() {
+  const style = document.createElement("style");
+  style.innerHTML = drawioCss;
+  document.head.appendChild(style);
 }
