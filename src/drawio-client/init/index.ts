@@ -4,7 +4,7 @@ import { RequestManager } from "./RequestManager";
 import { ConfigurationManager } from "./ConfigurationManager";
 import drawioCss from "inline!./src/drawio-client/drawio.css";
 import darkmodeCss from "inline!./src/assets/dark.css";
-
+import {} from "obsidian";
 /**
  * This is the entry point that is loaded into the iframe.
  * It configures global variables and patches the DOM to intercept requests
@@ -21,7 +21,9 @@ function init(win: Window) {
   // load the css files in directly into to the frame
   // to get around obsidian's new content security policy
   frame.addCss(drawioCss);
-  frame.addCss(darkmodeCss);
+
+  // FIXME : detect dark-mode for now since there is no media detection on the CSS
+  // frame.addCss(darkmodeCss);
 }
 
 init(window);
